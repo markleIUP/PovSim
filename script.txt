@@ -1,0 +1,180 @@
+<div id='iupStartUp'>
+This is the initializion screen intended for use by IUP researchers conducting this study. Here,
+you can adjust the player's starting money, paycheck amounts, and TANF payment
+amounts (note: custom settings default to TANF payments as opposed to child support payments)
+in addition to the game length. Alternatively, you may select one of the default
+presets below which adhere to the numbers initially indicated in the Poverty Simulator game design document.
+</div>
+
+<div id='welcomeScreen'>
+Welcome to IUP's Poverty Simulator. This short game will assess your ability to
+juggle the numerous time and monetary constraints placed upon individuals who live
+at or close to the poverty line.
+</div>
+
+<!--HOME-->
+<div id='homeKids'>
+You are cozy in your home. Your kids are running around having fun and
+you spend some time playing with them. But in the back of your mind, you know
+that there are about a million different things you should be doing right now...
+</div>
+
+<div id='homeNoKids'>
+You are cozy in your home, but it's not quite the same without your kids. You hope
+they come home soon. You spend your time thinking about the million different things
+you should be doing right now.
+</div>
+
+<div id='homeKidsInBed'>
+Your kids have gone to bed. After tucking them in you reflect on your day and think about
+what else you need to do in the morning.
+</div>
+
+<div id='homeContext'>
+Where would you like to go?
+</div>
+
+<!--QUICK CASH-->
+<div id='quickCashArrive'>
+You arrive at the Quick Cash. The interior is dimly lit and smells faintly of mold.
+The store is mostly empty of patrons, but the shelves are overflowing with old odds
+and ends that have been pawned off over the years. As you enter, a clerk behind the
+counter looks up at you briefly before returning to whatever it is he is looking at on his
+cell phone.
+</div>
+
+div id='quickCashPay'>
+The man sets down his phone for a moment and looks at you. "Cashing a check? No problem,"
+he says to you. "Usual rates apply."
+</div>
+
+<div id='quickCashPayWarning'>
+<b>THE QUICK CASH WILL CHARGE YOU 10% OF YOUR TOTAL WEEKLY INCOME TO CASH A PAYCHECK!</b>
+</div>
+
+<div id='quickVoucherBuy'>
+The cashier sets his phone down after a few seconds and rummages through a drawer. After a few
+moments he pulls out a crumpled envelope and looks up at you expectantly. "How many did you
+say you wanted?" he asks.
+</div>
+
+<div id='quickPay'>
+The cashier smiles at you. "Certainly! No problem! Usual rates apply, of course," he says, as
+he glances at the sum written on your check. He pops open the cash drawer and looks at you. "Ok?"
+</div>
+
+<div id='payAdvance'>
+The clerk asks for proof of your previous paycheck and then takes down some of your vital information:
+place of employment, employer's phone number, your address, and id number. "A 30% interest charge applies
+when you pay us back," he says. "Is that alright?"
+</div>
+
+<div id='payQuickBack'>
+He pulls a large, faded spiral ring notebook from behind the counter and flips to your last name. He
+makes a note of how much you owe and then raises an eyebrow. "How much we payin' back today?"
+</div>
+
+<div id='pawn'>
+The cashier smiles a toothy grin and you get the feeling that you are a sheep under the gaze of a wolf.
+"What, uh, what did you have with you?" he asks.
+</div>
+
+<div id='pawnAll'>
+He looks carefully at the appliances, plugging them in briefly to ensure they power up, and then flips
+through the jewelry with an experienced hand. He clears his throat after a moment and says, "I mean, it's
+not really the best quality. This is the best I can do."
+</div>
+
+<div id='pawnJewels'> He flips through the jewelry with an experienced hand. He clears his throat after a moment
+and says, "It's a little dingy and out of fashion. Here's my offer."
+</div>
+
+<div id='pawnApps'>
+He plugs them in to ensure they work and then surveys his inventory sitting on the shelves. He scratches his
+chin and says, "Here's my offer."
+</div>
+
+<div id='confirmPawn'>
+You get the distinct feeling that you are being swindled, but you also feel as if you need the money. You think
+about what to do for a moment, and then nod you head in assent.
+</div>
+
+<!--BANK-->
+<div id='bankArrive'>
+You enter the double glass doors of the bank and wave half-heartedly at the security guard.
+He gives you a stern nod as your shoes click-clack against the polished floor of the building.
+The place smells vaguely of bleach. You stand in line for a teller and, after several moments,
+you stand before a neatly dressed woman who smiles broadly at you. "How can I help you?"
+</div>
+
+<div id='loan'>
+The bank offers loans in the quantities of $250, $500, and $1000. How much did you want to ask for?
+</div>
+
+<div id='loanDeny'>
+You mention taking out a loan and the cashier asks you to wait a moment. She steps away from the counter and,
+ a few moments later, returns with a man whom she introduces as the loan manager. He motions toward a door which
+ he appears at momentarily. He leads you to a small cubicle, shakes your hand, and asks for a surprisingly
+large amount of paperwork and personal questions. After what seems like ages, he frowns, looks up at you and
+sadly shakes his head. "Unfortunately, I am unable to offer you a loan given your past credit history and your
+current financial situation."
+</div>
+
+<div id='loanDeny1'>
+You ask the cashier for a loan again. She looks at you for a moment, then goes and grabs the loan manager once more.
+He takes you through the same door, goes through the same process, and again, denies your loan. You sigh dejectedly.
+</div>
+
+<div id='loanDeny2'>
+The cashier shakes her head. "Unfortunately I've been told by the loan manager that we cannot help you with that. You are
+free to visit our competitors up the street if you need additional assistance. Is there anything else I can help you with?"
+</div>
+
+<div id='bankPaycheck'>
+The cashier takes your check and asks for your ID. After verifying your identity and stamping a few papers at a blinding speed
+she quickly counts out your money. "Is there anything else I can help with?"
+</div>
+
+<div id='noPaycheck'>
+She raises an eyebrow. "You uh... need to give me a paycheck to cash one."
+</div>
+
+<div id='cashSupBank'>
+The cashier flashes a smile. "Of course!" she says. "What will you be cashing?" she asks. Despite her effusive smile
+and chipper voice that she is judging you.
+</div>
+
+<!--EMPLOYMENT OFFICE-->
+<div id='employmentOfficeArrive'>
+This space will be filled with something interesting to do... some day.
+</div>
+
+<!--UTILITES COMPANY-->
+<div id='utilitiesArrive'>
+The lobby of the utilities company is small, but welcoming. Pictures of your town from the 1950's and
+60's line the walls, and a number of potted plants spruce the place up a bit. Somewhere, from one of the
+back offices, you can smell the delicious aroma of coffee. You approach the plexiglass window and a man
+with a luxurious mustache greets you. "What can we do for you today?"
+</div>
+
+<div id='payUtilitiesText'>
+He nods his head. "Of course. How much and which bill would you like to pay?" he asks cordially.
+</div>
+
+<!--LANDLORD-->
+<div id='landlordArrive'>
+As you walk from the bus stop to your landlord's front door you can't help but reflect about how
+much nicer her neighborhood is than yours. Every car in every driveway seems shiny and new, and every lawn
+is immaculately maintained - probably because of a home owners association requirement. You knock on the
+large mahogany doors of her place. After a moment, a housekeeper answers who says he can take your rent check if
+that is all you need.
+</div>
+
+<div id='payRent'>
+The housekeeper says, "Very good. How much will you be paying?"
+</div>
+
+<div id='payRentComplete'>
+He takes your money, deftly counts it, and closes the door in your face. A moment passes and he opens the door
+again and offers you a receipt. "Will there be anything else?" he asks with no curiosity in his voice.
+</div>

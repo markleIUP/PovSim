@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> IUP Poverty Simulator v. 1.2 </title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="jquery-3.3.1.js"></script>
+<meta charset="UTF-8">
+</head>
+<body>
+<div id='statusBar'></div>
+<div id='textPanel'></div>
+<div id='contextPanel'></div>
+<div id='menuPanel'></div>
+<div id='kids' class='popup'>
+  <div class='modal-content' id='kidsContent'>
+  </div>
+</div>
+<div id='end' class='popupEnd'>
+  <div class='modal-content-end'>
+    <p id='nextDay'></p>
+    <p id='amtSpent'></p>
+    <p id='amtEarned'></p>
+    <p id='amtOwed'></p>
+    <p id='nextDayVouchers'></p>
+    <p id='warnings'></p>
+    <p id='continue'></p>
+  </div>
+<div id='warningsPopup' class='popupEnd'>
+  <div class='modal-content-end'>
+    <p id='warningsTotal'></p>
+  </div>
+</div>
+<script src="logic.js"></script>
+</body>
+</html>
+
+<!--
+Day:
+Amount Spent:
+Amount Earned (both from work and from pawning):
+Amount Owed (and to whom):
+Travel Vouchers:
+Major Warnings (if any):

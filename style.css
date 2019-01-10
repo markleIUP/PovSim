@@ -75,9 +75,11 @@ button {
 }
 
 #statusBar {
+  font-size: 175%;
   text-align: center;
   color: white;
   background-color: black;
+
 }
 
 #contextPanel {

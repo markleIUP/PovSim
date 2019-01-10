@@ -8,15 +8,18 @@ let amtEarned = 0;
 let amtOwed = 0;
 let weekNumber = 0;
 let dayNext = 0;
+let dockPay = 0;
+let dockedTotal = 0;
 
 $(document).ready( function () {
   $('#statusBar').html("Cash: $<span id='funds'></span> || \
   Vouchers: <span id='vouchers'></span> || Day: <span id='day'></span> \
-   || Time: <span id='time'>6</span>")
+   || Time: <span id='time'>6</span> || Dock: <span id='testDock'></span>")
   $('#funds').html(funds);
   $('#vouchers').html(vouchers);
   $('#day').html(day[0]);
   $('#time').html(time);
+  $('#testDock').html(dockPay);
   $('#textPanel').load('script.txt #iupStartUp');
   $('#contextPanel').html("<b> Starting Money:</b> $\
   <form>\
@@ -29,6 +32,10 @@ $(document).ready( function () {
   <br> <b> TANF/Child Support check amounts: </b> $\
   <form>\
   <input type='number' id='initializeSupPayAmount' min='1' value='768'>\
+  </form>\
+  <br><b> Amount of Pay to Dock Late Workers (i.e., pay for each day):</b>\
+  <form>\
+  <input type='number' id='customDockAmt' min='1' value='28.40'>\
   </form>\
   <br><b> Game Length (in weeks):</b>\
   <form>\
@@ -44,16 +51,20 @@ let version = '';
 let weeklyPay = '';
 let supPay = '';
 let supType = '';
+let dailyPay = '';
+let paycheckValue = '';
 
 function poor() {
   version = 'poor';
   weeklyPay = 142;
+  paycheckValue = weeklyPay;
+  dailyPay = 28.40;
   supPay = 768;
   supType = 'TANF';
   funds = 142;
   count = 6;
   countPM = 0;
-  clockVar = setInterval(displayTime, 3750);
+  clockVar = setInterval(displayTime, 1000);
   $('#funds').html(funds);
   displayTime();
 }
@@ -61,25 +72,29 @@ function poor() {
 function rich() {
   version = 'rich';
   weeklyPay = 568;
+  paycheckValue = weeklyPay;
+  dailyPay = 113.60;
   supPay = 926;
   supType = 'child support';
   funds = 568;
   count = 6;
   countPM = 0;
-  clockVar = setInterval(displayTime, 3750);
+  clockVar = setInterval(displayTime, 1000);
   $('#funds').html(funds);
   displayTime();
 }
 
 function custom() {
   weeklyPay = $('#initializeWeeklyPayAmount').val()
+  paycheckValue = weeklyPay;
+  dailyPay = (weeklyPay / 4);
   version = 'poor';
   supPay = $('#initializeSupPayAmount').val();
   supType = 'TANF';
   funds = $('#startingWeeklyPay').val();
   count = 6;
   countPM = 0;
-  clockVar = setInterval(displayTime, 3750);
+  clockVar = setInterval(displayTime, 1000);
   $('#funds').html(funds);
   displayTime();
 }
@@ -187,15 +202,15 @@ function quickCashPay() {
 }
 
 function cashPayQuick() {
-  let fee = (weeklyPay * 0.1).toFixed(2);
-  let finalPay = (weeklyPay - fee).toFixed(2);
+  let fee = (paycheckValue * 0.1).toFixed(2);
+  let finalPay = (paycheckValue - fee).toFixed(2);
 
   if (paycheckAmount < 1) {
   $('#textPanel').load('script.txt #noPaycheck');
   $('#contextPanel').html("You have <b>0</b> paychecks to cash.")
   } else if (paycheckAmount >= 1) {
   amtEarned = amtEarned + parseInt(finalPay);
-  amtOwed = amtOwed + parseInt(weeklyPay);
+  amtOwed = amtOwed + parseInt(paycheckValue);
   paycheckAmount--;
   $('#textPanel').load('script.txt #bankPaycheck');
   $('#contextPanel').html("You gained $<span id='cashAmt'></span> and were charged $<span id='feeAmt'></span>.")
@@ -211,20 +226,20 @@ let advanceInterest = '';
 let oweQuickCash = 0;
 
 function quickPayAdvance() {
-  advanceInterest = (weeklyPay * 0.3).toFixed(2);
+  advanceInterest = (paycheckValue * 0.3).toFixed(2);
   $('#textPanel').load('script.txt #payAdvance');
   $('#contextPanel').html("You will owe $<span id='payAmt'></span> plus 30% interest ($<span id='interest'></span>) next week \
   if you choose to take a pay advance.")
   $('#menuPanel').html("<button onclick='payAdvanceConfirm()'>Take a pay advance</button>\
   <button onclick='toQuickCash()'>Nevermind</button>");
-  $('#payAmt').html(weeklyPay);
+  $('#payAmt').html(paycheckValue);
   $('#interest').html(advanceInterest);
 }
 
 function payAdvanceConfirm() {
   payAdvance = 1;
-  oweQuickCash = weeklyPay + parseInt(advanceInterest);
-  amtEarned = amtEarned + parseInt(weeklyPay);
+  oweQuickCash = paycheckValue + parseInt(advanceInterest);
+  amtEarned = amtEarned + parseInt(paycheckValue);
   amtOwed = amtOwed + parseInt(oweQuickCash);
   $('#contextPanel').html("You owe Quick Cash $<span id='totalOwedQuick'></span> by next Friday.\
   <br> You have gained $<span id='advanceAmount'></span>.")
@@ -233,10 +248,10 @@ function payAdvanceConfirm() {
   <button onclick = 'pawn()'>Pawn your belongings</button>\
   <button onclick = 'travel();'>Travel somewhere else</button>\
   <button onclick = 'payQuickBack()'>Pay your balance</button>");
-  funds = funds + parseInt(weeklyPay);
+  funds = funds + parseInt(paycheckValue);
   $('#funds').html(funds);
   $('#totalOwedQuick').html(oweQuickCash);
-  $('#advanceAmount').html(weeklyPay);
+  $('#advanceAmount').html(paycheckValue);
 }
 
 function payQuickBack() {
@@ -413,11 +428,11 @@ function cashPay() {
     $('#contextPanel').html("You have <b>0</b> paychecks to cash.")
   } else if (paycheckAmount >= 1) {
     paycheckAmount--;
-    amtEarned = amtEarned + weeklyPay;
+    amtEarned = amtEarned + paycheckValue;
     $('#textPanel').load('script.txt #bankPaycheck');
     $('#contextPanel').html("You gained $<span id='payAmt'></span>.")
-    $('#payAmt').html(weeklyPay);
-    funds = funds + weeklyPay;
+    $('#payAmt').html(paycheckValue);
+    funds = funds + paycheckValue;
     $('#funds').html(funds);
   }
 }
@@ -443,8 +458,8 @@ function toEmploymentOffice() {
   loc = 'atWork';
   voucherLose();
   $('#textPanel').load('script.txt #employmentOfficeArrive');
-  $('#contextPanel').html('');
-  $('#menuPanel').html("<button onclick = 'travel();'>Travel somewhere else</button>");
+  $('#contextPanel').load('script.txt #ticTacToe');
+  $('#menuPanel').html('');
 }
 
 //UTILITIES COMPANY
@@ -631,6 +646,7 @@ let countPM = '';
 let clockVar = '';
 let clockPM = '';
 let dayUpdate = '';
+let dockStart='';
 
 function displayTime() {
   count++;
@@ -639,10 +655,14 @@ function displayTime() {
   if (count == 8 && loc == 'atHome') {
     $('#textPanel').load('script.txt #homeNoKids');
   }
+  if (count == 9 && loc !== 'atWork' && day != day[5] && day != day[6]) {
+    lateWarning();
+    dockStart = setInterval(increaseDockPay, 1000);
+  }
   if (count == 12) {
     $("#time").html(count + " PM");
     clearInterval(clockVar);
-    clockPM = setInterval(displayPM, 3750);
+    clockPM = setInterval(displayPM, 1000);
   }
 }
 
@@ -653,6 +673,10 @@ function displayPM() {
   if (countPM == 4 && loc == 'atHome') {
     $('#textPanel').load('script.txt #homeKids');
   }
+  if (countPM == 5 && loc == 'atWork') {
+    $('#menuPanel').html("<button onclick = 'travel();'>Punch out and go somewhere else</button>");
+  }
+  if (countPM == 6) {clearInterval(dockStart);}
   if (dayNext == 4 && countPM == 5) {displayPaycheck();}
   if (countPM == 9 && loc == 'atHome') {
     $('#textPanel').load('script.txt #homeKidsInBed');
@@ -664,18 +688,56 @@ function displayPM() {
 }
 
 function displayPaycheck() {
-  ('#kidsContent').html("You have earned a paycheck!");
-  ('#kids').show();
+  $('#kidsContent').html("You have earned a paycheck!");
+  $('#kids').show();
   setTimeout(function() {
-    $('#kids').fadeOut();
-  }, 3000);
+     $('#kids').fadeOut();
+ }, 3000);
+}
+
+function lateWarning() {
+    $('#kidsContent').html("You are late for work!");
+    $('#kids').show();
+    setTimeout(function() {
+       $('#kids').fadeOut();
+   }, 3000);
+}
+
+
+let payHasBeenDocked = 0;
+
+function increaseDockPay() {
+  if (loc == 'atWork') {
+    clearInterval(dockStart);
+  }
+  else {
+    dockPay++;
+    $('#testDock').html(dockPay); //Comment this line out late....
+    if (dockPay == 8) {
+      if (version == 'poor') {
+      amtEarned = dailyPay - 28.40;
+      dockPay = 0;
+      payHasBeenDocked++;
+      }
+      else if (version == 'rich') {
+      amtEarned = dailyPay - 113.60;
+      dockPay = 0;
+      payHasBeenDocked++;
+      }
+      else if (version == 'custom') {
+      amtEarned = dailyPay - customDockAmt;
+      dockPay = 0;
+      payHasBeenDocked++;
+      }
+    }
+  }
 }
 
 let kids = 1;
 function kidsHome() {
 if (dayNext < 5) {
   if (kids == 1) {
-    $('#kidsContent').html("Your kids have left for school.")
+    $('#kidsContent').html("Your kids have left for school.");
     $('#kids').show();
     setTimeout(function() {
        $('#kids').fadeOut();
@@ -706,11 +768,13 @@ function endOfDay() {
   if (dayNext == 6) {
     dayNext = -1;
     weekNumber++;
+    payHasBeenDocked = 0;
   }
   if (weekNumber == 4){
     endGame(); //Check for end of game
   }
   if (dayNext == 4 ){
+    paycheckValue = paycheckValue - dockedTotal;
     paycheckAmount++;
   }
   if (dayNext == 3 && rent > 0) {
@@ -731,9 +795,15 @@ function endOfDay() {
   if (dayNext == 4 && oweQuickCash > 0) {
     quickLate = 1;
   }
+  if (payHasBeenDocked > 0) {
+  dockedTotal = (payHasBeenDocked * dailyPay).toFixed(2);
+  }
     upcomingWarnings = '';
     dayNext++;
     dayUpdate = day[dayNext];
+    if (amtEarned > 0) {
+    amtEarned = amtEarned + dailyPay;
+    }
     $('#nextDay').html("Tomorrow is: " + dayUpdate);
     $('#amtSpent').html("You spent: $" + amtSpent);
     $('#amtEarned').html("You earned: $" + amtEarned);
@@ -781,18 +851,21 @@ function showWarnings() {
     quickLate = 0;
     upcomingWarnings = upcomingWarnings + '<br><br>Your payment to the Quick Cash is late!';
   }
-    $('#warningsTotal').html(upcomingWarnings + "<br><br><button onclick = 'restart()'>Continue</button>");
-  if (funds > amtOwed && vouchers > 5 && rentDueSoon == 0 && rentIsLate == 0)
-  {$('#warningsTotal').html("<br>You are managing to survive! Nothing to report at the moment. <br> \
+  if (payHasBeenDocked > 0) {
+    upcomingWarnings = upcomingWarnings + '<br><br> You were docked $<span id="amtDocked"></span> for being late to work!';
+  }
+  $('#warningsTotal').html(upcomingWarnings + "<br><br><button onclick = 'restart()'>Continue</button>");
+  $('#amtDocked').html(dockedTotal);
+  if (funds > amtOwed && vouchers > 5 && rentDueSoon == 0 && rentIsLate == 0)  {
+  $('#warningsTotal').html("<br>You are managing to survive! Nothing to report at the moment. <br> \
   <button onclick = 'restart()'>Continue</button>");
   }
 }
 
-
 function restart() {
   count = 6;
   countPM = 0;
-  clockVar = setInterval(displayTime, 3750);
+  clockVar = setInterval(displayTime, 1000);
   clockPM = '';
   amtEarned = 0;
   amtSpent = 0;
@@ -806,3 +879,6 @@ function restart() {
 function endGame() {
   $('#textPanel').html("GG!");
 }
+
+
+//Credit: Cory Fogliani

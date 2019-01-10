@@ -146,7 +146,13 @@ and chipper voice that she is judging you.
 
 <!--EMPLOYMENT OFFICE-->
 <div id='employmentOfficeArrive'>
-This space will be filled with something interesting to do... some day.
+You arrive and rub the sleep from your eyes. Flourescent lights blare down on you. After a quick trip to the coffee
+machine you find your way to your cubicle and sit down for another day of monotony.
+Your job is boring, but at least you have a lot of free time on your hands....
+</div>
+
+<div id='ticTacToe'>
+<iframe src="tictac.html" height="215" width="300"></iframe>
 </div>
 
 <!--UTILITES COMPANY-->
